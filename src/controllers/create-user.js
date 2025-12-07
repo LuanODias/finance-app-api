@@ -21,9 +21,9 @@ export class CreateUserController {
                 }
             }
 
-            const isValidPassword = params.password.length < 6
+            const isNotValidPassword = params.password.length < 6
 
-            if (isValidPassword) {
+            if (isNotValidPassword) {
                 return badRequest({
                     message: 'Password must be be at least 6 characters',
                 })
