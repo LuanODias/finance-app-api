@@ -6,6 +6,7 @@ import {
     invalidAmountResponse,
     invalidIdResponse,
     invalidTypeResponse,
+    notFound,
     ok,
     serverError,
 } from '../helpers/index.js'
@@ -52,12 +53,17 @@ export class UpdateTransactionController {
                 }
             }
 
-            const transaction = await this.updateTransactionUseCase.execute({
-                id: httpRequest.params.transactionId,
-                params,
-            })
+            const updatedTransaction =
+                await this.updateTransactionUseCase.execute(
+                    httpRequest.params.transactionId,
+                    params,
+                )
 
-            return ok(transaction)
+            if (!updatedTransaction) {
+                return notFound({ message: 'Transaction not found.' })
+            }
+
+            return ok(updatedTransaction)
         } catch (error) {
             console.log(error)
             return serverError()

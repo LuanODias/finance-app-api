@@ -1,4 +1,4 @@
-import 'dotenv/config.js' // Usado dessa forma para o ESLint não apontar erro.
+import 'dotenv/config.js'
 import express from 'express'
 import {
     makeGetUserByIdController,
@@ -9,6 +9,7 @@ import {
 import {
     makeCreateTransactionController,
     makeGetTransactionsByUserIdController,
+    makeUpdateTransactionsController,
 } from './src/factories/controllers/transaction.js'
 
 const app = express()
@@ -62,6 +63,15 @@ app.post('/api/transactions', async (request, response) => {
 
     const { statusCode, body } =
         await createTransactionController.execute(request)
+
+    response.status(statusCode).send(body)
+})
+
+app.patch('/api/transactions/:transactionId', async (request, response) => {
+    const updateTransactionController = makeUpdateTransactionsController()
+
+    const { statusCode, body } =
+        await updateTransactionController.execute(request)
 
     response.status(statusCode).send(body)
 })

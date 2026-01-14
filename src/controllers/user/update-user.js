@@ -1,5 +1,4 @@
 import { EmailAlreadyInUserError } from '../../errors/user.js'
-import {} from '../helpers/http.js'
 import {
     invalidPasswordResponse,
     emailIsAlreadyInUseResponse,
