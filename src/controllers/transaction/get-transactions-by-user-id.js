@@ -8,14 +8,14 @@ import {
     userNotFoundResponse,
 } from '../helpers/index.js'
 
-export class GetTransactionsByUserId {
+export class GetTransactionsByUserIdController {
     constructor(GetTransactionsByUserIdUseCase) {
         this.GetTransactionsByUserIdUseCase = GetTransactionsByUserIdUseCase
     }
 
     async execute(httpRequest) {
         try {
-            const userId = httpRequest.query.user_id
+            const userId = httpRequest.query.userId
 
             if (!userId) {
                 return requiredFieldIsMissingResponse('userId')

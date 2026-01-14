@@ -1,25 +1,26 @@
 import { UserNotFoundError } from '../../errors/user.js'
 
-export class GetTransactionsByUserId {
+export class GetTransactionsByUserIdUseCase {
     constructor(
         getTransactionsByUserIdRepository,
         PostgresGetUserByIdRepository,
     ) {
         this.getTransactionsByUserIdRepository =
             getTransactionsByUserIdRepository
+
         this.postgresGetUserByIdRepository = PostgresGetUserByIdRepository
     }
     async execute(params) {
-        const user = await this.PostgresGetUserByIdRepository.execute(
-            params.user_id,
-        )
+        const userId = params.userId || params.user_id
+
+        const user = await this.postgresGetUserByIdRepository.execute(userId)
 
         if (!user) {
-            throw new UserNotFoundError(params.user_id)
+            throw new UserNotFoundError(userId)
         }
 
         const transactions =
-            await this.getTransactionsByUserIdRepository.execute(params.user_id)
+            await this.getTransactionsByUserIdRepository.execute(userId)
 
         return transactions
     }
