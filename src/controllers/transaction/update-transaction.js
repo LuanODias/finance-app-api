@@ -1,15 +1,6 @@
-import {
-    badRequest,
-    checkIfAmountIsValid,
-    checkIfIdIsValid,
-    checkIfTypeIsValid,
-    invalidAmountResponse,
-    invalidIdResponse,
-    invalidTypeResponse,
-    notFound,
-    ok,
-    serverError,
-} from '../helpers/index.js'
+import { badRequest, notFound, ok, serverError } from '../helpers/index.js'
+import { updateTransactionSchema } from '../../schemas/index.js'
+import { ZodError } from 'zod'
 
 export class UpdateTransactionController {
     constructor(updateTransactionUseCase) {
@@ -17,41 +8,9 @@ export class UpdateTransactionController {
     }
     async execute(httpRequest) {
         try {
-            const idIsValid = checkIfIdIsValid(httpRequest.params.transactionId)
-
-            if (!idIsValid) {
-                return invalidIdResponse()
-            }
-
             const params = httpRequest.body
 
-            const allowedFields = ['name', 'date', 'amount', 'type']
-
-            const someFieldIsNotAllowed = Object.keys(params).some(
-                (field) => !allowedFields.includes(field),
-            )
-
-            if (someFieldIsNotAllowed) {
-                return badRequest({
-                    message: 'Some provided field is not allowed.',
-                })
-            }
-
-            if (params.amount) {
-                const amountIsValid = checkIfAmountIsValid(params.amount)
-
-                if (!amountIsValid) {
-                    return invalidAmountResponse()
-                }
-            }
-
-            if (params.type) {
-                const typeIsValid = checkIfTypeIsValid(params.type)
-
-                if (!typeIsValid) {
-                    return invalidTypeResponse()
-                }
-            }
+            await updateTransactionSchema.parseAsync(params)
 
             const updatedTransaction =
                 await this.updateTransactionUseCase.execute(
@@ -65,7 +24,15 @@ export class UpdateTransactionController {
 
             return ok(updatedTransaction)
         } catch (error) {
-            console.log(error)
+            if (error instanceof ZodError) {
+                return badRequest({ message: error.errors[0].message })
+            }
+
+            if (error instanceof Error) {
+                return badRequest({ message: error.message })
+            }
+
+            console.error(error)
             return serverError()
         }
     }
