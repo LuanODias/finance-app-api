@@ -1,4 +1,4 @@
-import { updateUserSchema } from '../../schemas/user.js'
+import { updateUserSchema } from '../../schemas/index.js'
 import {
     invalidIdResponse,
     checkIfIdIsValid,
