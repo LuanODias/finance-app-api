@@ -12,6 +12,7 @@ export default defineConfig([
             globals: {
                 ...globals.node,
                 ...globals.browser,
+                ...globals.jest,
             },
         },
     },
