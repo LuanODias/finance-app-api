@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "jest",
-        "test:watch": "jest --watch",
+        "test": "jest --silent",
+        "test:watch": "jest --watch --silent",
         "postinstall": "npx husky install && npx prisma generate",
         "migrations": "node src/db/postgres/migrations/exec.js",
         "start:dev": "node --watch index.js"
