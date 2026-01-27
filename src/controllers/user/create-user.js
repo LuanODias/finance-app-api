@@ -21,10 +21,6 @@ export class CreateUserController {
             }
             console.error(error)
 
-            if (error instanceof Error) {
-                return badRequest({ message: error.message })
-            }
-
             return serverError()
         }
     }
