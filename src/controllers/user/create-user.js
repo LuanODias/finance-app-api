@@ -1,5 +1,11 @@
 import { createUserSchema } from '../../schemas/index.js'
-import { badRequest, created, serverError } from '../helpers/index.js'
+import {
+    badRequest,
+    created,
+    serverError,
+    EmailAlreadyInUseError,
+    emailIsAlreadyInUseResponse,
+} from '../helpers/index.js'
 import { ZodError } from 'zod'
 
 export class CreateUserController {
@@ -19,6 +25,11 @@ export class CreateUserController {
             if (error instanceof ZodError) {
                 return badRequest({ message: error.errors[0].message })
             }
+
+            if (error instanceof EmailAlreadyInUseError) {
+                return emailIsAlreadyInUseResponse()
+            }
+
             console.error(error)
 
             return serverError()
