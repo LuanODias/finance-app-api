@@ -60,4 +60,20 @@ describe('GetUserByIdController', () => {
 
         expect(httpResponse.statusCode).toBe(404)
     })
+
+    it('should return 500 if an internal server error occurs', async () => {
+        const { sut, getUserByIdUseCaseStub } = makeSut()
+
+        jest.spyOn(getUserByIdUseCaseStub, 'execute').mockRejectedValueOnce(
+            new Error(),
+        )
+
+        const httpResponse = await sut.execute({
+            params: {
+                userId: faker.string.uuid(),
+            },
+        })
+
+        expect(httpResponse.statusCode).toBe(500)
+    })
 })
