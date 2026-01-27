@@ -26,25 +26,25 @@ describe('GetUserByIdController', () => {
     it('should return 200 if a user is found', async () => {
         const { sut } = makeSut()
 
-        const httpResponse = await sut.execute({
+        const result = await sut.execute({
             params: {
                 userId: faker.string.uuid(),
             },
         })
 
-        expect(httpResponse.statusCode).toBe(200)
+        expect(result.statusCode).toBe(200)
     })
 
     it('should return 400 if an invalid id is provided', async () => {
         const { sut } = makeSut()
 
-        const httpResponse = await sut.execute({
+        const result = await sut.execute({
             params: {
                 userId: 'invalid_id',
             },
         })
 
-        expect(httpResponse.statusCode).toBe(400)
+        expect(result.statusCode).toBe(400)
     })
 
     it('should returns 404 if user is not found', async () => {
@@ -52,13 +52,13 @@ describe('GetUserByIdController', () => {
 
         jest.spyOn(getUserByIdUseCaseStub, 'execute').mockReturnValueOnce(null)
 
-        const httpResponse = await sut.execute({
+        const result = await sut.execute({
             params: {
                 userId: faker.string.uuid(),
             },
         })
 
-        expect(httpResponse.statusCode).toBe(404)
+        expect(result.statusCode).toBe(404)
     })
 
     it('should return 500 if an internal server error occurs', async () => {
@@ -68,12 +68,12 @@ describe('GetUserByIdController', () => {
             new Error(),
         )
 
-        const httpResponse = await sut.execute({
+        const result = await sut.execute({
             params: {
                 userId: faker.string.uuid(),
             },
         })
 
-        expect(httpResponse.statusCode).toBe(500)
+        expect(result.statusCode).toBe(500)
     })
 })

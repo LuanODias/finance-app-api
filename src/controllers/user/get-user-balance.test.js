@@ -24,9 +24,9 @@ describe('GetUserBalanceController', () => {
     it('should return 200 when getting user balance', async () => {
         const { sut } = makeSut()
 
-        const httpResponse = await sut.execute(httpRequest)
+        const result = await sut.execute(httpRequest)
 
-        expect(httpResponse.statusCode).toBe(200)
+        expect(result.statusCode).toBe(200)
     })
 
     it('should return 400 when userId is invalid', async () => {
@@ -48,8 +48,8 @@ describe('GetUserBalanceController', () => {
             new Error(),
         )
 
-        const httpResponse = await sut.execute(httpRequest)
+        const result = await sut.execute(httpRequest)
 
-        expect(httpResponse.statusCode).toBe(500)
+        expect(result.statusCode).toBe(500)
     })
 })
