@@ -8,6 +8,8 @@ describe('GetUserBalanceController', () => {
         }
     }
 
+    const teste
+
     const makeSut = () => {
         const getUserBalanceUseCase = new GetUserBalanceUseCaseStub()
         const sut = new GetUserBalanceController(getUserBalanceUseCase)
