@@ -10,6 +10,7 @@ const config = {
         '<rootDir>/node_modules/',
         '<rootDir>/.postgres-data/',
     ],
+    transformIgnorePatterns: ['node_modules/(?!@faker-js)'],
 }
 
 export default config
