@@ -4,8 +4,6 @@ import {
     emailIsAlreadyInUseResponse,
     EmailAlreadyInUseError,
 } from '../helpers/index.js'
-import { email } from 'zod/v4'
-import { password } from 'pg/lib/defaults'
 
 describe('CreateUserController', () => {
     class CreateUserUseCaseStub {
