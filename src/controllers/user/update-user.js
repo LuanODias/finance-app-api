@@ -5,6 +5,7 @@ import {
     badRequest,
     ok,
     serverError,
+    EmailAlreadyInUseError,
 } from '../helpers/index.js'
 import { ZodError } from 'zod'
 
@@ -52,6 +53,10 @@ export class UpdateUserController {
         } catch (error) {
             if (error instanceof ZodError) {
                 return badRequest({ message: error.errors[0].message })
+            }
+
+            if (error instanceof EmailAlreadyInUseError) {
+                return badRequest({ message: error.message })
             }
 
             console.error(error)
