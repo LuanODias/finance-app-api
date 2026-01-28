@@ -63,7 +63,7 @@ describe('UpdateUserController', () => {
         //arrange
         const { sut } = makeSut()
 
-        const httpRequestWithInvalidEmail = {
+        const httpRequestWithInvalidPassword = {
             params: httpRequest.params,
             body: {
                 ...httpRequest.body,
@@ -74,7 +74,7 @@ describe('UpdateUserController', () => {
         }
 
         //act
-        const result = await sut.execute(httpRequestWithInvalidEmail)
+        const result = await sut.execute(httpRequestWithInvalidPassword)
 
         //assert
         expect(result.statusCode).toBe(400)
@@ -84,7 +84,7 @@ describe('UpdateUserController', () => {
         //arrange
         const { sut } = makeSut()
 
-        const httpRequestWithInvalidEmail = {
+        const httpRequestWithInvalidId = {
             params: {
                 userId: 'invalid_id',
             },
@@ -94,7 +94,7 @@ describe('UpdateUserController', () => {
         }
 
         //act
-        const result = await sut.execute(httpRequestWithInvalidEmail)
+        const result = await sut.execute(httpRequestWithInvalidId)
 
         //assert
         expect(result.statusCode).toBe(400)
@@ -104,9 +104,9 @@ describe('UpdateUserController', () => {
         //arrange
         const { sut } = makeSut()
 
-        const httpRequestWithInvalidEmail = {
+        const httpRequestWithUnallowedField = {
             params: {
-                userId: httpRequest.params,
+                userId: httpRequest.params.userId,
             },
             body: {
                 ...httpRequest.body,
@@ -115,9 +115,24 @@ describe('UpdateUserController', () => {
         }
 
         //act
-        const result = await sut.execute(httpRequestWithInvalidEmail)
+        const result = await sut.execute(httpRequestWithUnallowedField)
 
         //assert
         expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 500 if UpdateUserUseCase throws with generic error', async () => {
+        //arrange
+        const { sut, updateUserUseCase } = makeSut()
+
+        jest.spyOn(updateUserUseCase, 'execute').mockRejectedValueOnce(
+            new Error(),
+        )
+
+        //act
+        const result = await sut.execute(httpRequest)
+
+        //assert
+        expect(result.statusCode).toBe(500)
     })
 })
