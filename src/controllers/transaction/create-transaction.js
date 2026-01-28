@@ -21,10 +21,6 @@ export class CreateTransactionController {
                 return badRequest({ message: error.errors[0].message })
             }
 
-            if (error instanceof Error) {
-                return badRequest({ message: error.message })
-            }
-
             console.log(error)
             return serverError()
         }
