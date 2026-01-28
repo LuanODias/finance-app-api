@@ -116,4 +116,20 @@ describe('CreateTransactionController', () => {
         //assert
         expect(response.statusCode).toBe(400)
     })
+
+    it('should return 400 when amount is not a number', async () => {
+        //arrange
+        const { sut } = makeSut()
+
+        //act
+        const response = await sut.execute({
+            body: {
+                ...baseHttpRequest.body,
+                amount: 'not_a_number',
+            },
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
+    })
 })
