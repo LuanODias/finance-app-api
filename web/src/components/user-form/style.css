@@ -1,0 +1,111 @@
+.form-container {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.05),
+        0 4px 6px rgba(0, 0, 0, 0.05);
+
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+}
+.form-container h2 {
+    margin-bottom: 0.5rem;
+    color: #1a202c;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+.form-container p {
+    color: #718096;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+.form-container input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+
+    background-color: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    color: #2d3748;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-container input:focus {
+    outline: none;
+    background-color: #fff;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+.form-container button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+
+    background: linear-gradient(to right, #3182ce, #2b6cb0);
+    color: white;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 4px 6px rgba(50, 50, 93, 0.11),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.form-container button:hover {
+    background: linear-gradient(to right, #2c5282, #2a4365);
+    transform: translateY(-1px);
+    box-shadow:
+        0 7px 14px rgba(50, 50, 93, 0.1),
+        0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.form-container button:active {
+    transform: translateY(1px);
+}
+
+.form-container button:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message.success {
+    background-color: #c6f6d5;
+    color: #22543d;
+    border: 1px solid #9ae6b4;
+}
+
+.message.error {
+    background-color: #fed7d7;
+    color: #822727;
+    border: 1px solid #feb2b2;
+}

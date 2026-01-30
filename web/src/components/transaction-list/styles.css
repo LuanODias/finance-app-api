@@ -1,0 +1,153 @@
+.list-container {
+    width: 100%;
+}
+
+/* Table Styles */
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction-table th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #a0aec0;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.transaction-table td {
+    padding: 16px 0;
+    border-bottom: 1px solid #f7fafc;
+    font-size: 0.95rem;
+    color: #4a5568;
+}
+
+.transaction-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Columns */
+.col-name {
+    font-weight: 500;
+    color: #2d3748;
+}
+
+.col-amount {
+    font-weight: 600;
+}
+
+.col-amount.earning {
+    color: #38a169;
+}
+
+.col-amount.expense {
+    color: #e53e3e;
+}
+
+.col-amount.investment {
+    color: #805ad5;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge.earning {
+    background-color: #f0fff4;
+    color: #38a169;
+}
+
+.badge.expense {
+    background-color: #fff5f5;
+    color: #e53e3e;
+}
+
+.badge.investment {
+    background-color: #faf5ff;
+    color: #805ad5;
+}
+
+.col-date {
+    color: #718096;
+}
+
+.col-actions {
+    text-align: right;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #a0aec0;
+    font-size: 1.2rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #a0aec0;
+}
+
+/* Dropdown Menu */
+.action-menu {
+    position: absolute;
+    right: 0;
+    top: 70%;
+    background: white;
+    border-radius: 8px;
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    z-index: 10;
+    min-width: 140px;
+    overflow: hidden;
+    animation: fadeIn 0.1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #4a5568;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #f7fafc;
+}
+
+.menu-item.delete {
+    color: #e53e3e;
+}
+
+.menu-item.delete:hover {
+    background-color: #fff5f5;
+}
