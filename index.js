@@ -13,10 +13,12 @@ import {
     makeGetTransactionsByUserIdController,
     makeUpdateTransactionsController,
 } from './src/factories/controllers/transaction.js'
+import cors from 'cors'
 
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/api/users/:userId', async (request, response) => {
     const getUserByIdController = makeGetUserByIdController()
