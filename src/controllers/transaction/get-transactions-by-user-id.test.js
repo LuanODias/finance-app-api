@@ -69,7 +69,7 @@ describe('GetTransactionsByUserIdController', () => {
         expect(response.statusCode).toBe(400)
     })
 
-    it('should return 404 when user is not found', async () => {
+    it('should return 404 when GetUserByIdUseCase throws UserNotFoundError', async () => {
         //arrange
         const { sut, getTransactionsByUserIdUseCase } = makeSut()
 
