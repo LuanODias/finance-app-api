@@ -25,7 +25,7 @@ describe('GetTransactionsByUserIdController', () => {
         return { sut, getTransactionsByUserIdUseCase }
     }
 
-    it('should return 200 when finding transactions by user id sucssesfully', async () => {
+    it('should return 200 when finding transactions by user_id sucssesfully', async () => {
         //arrange
         const { sut } = makeSut()
 
@@ -38,5 +38,18 @@ describe('GetTransactionsByUserIdController', () => {
 
         //assert
         expect(response.statusCode).toBe(200)
+    })
+
+    it('should return 400 when missing user_id', async () => {
+        //arrange
+        const { sut } = makeSut()
+
+        //act
+        const response = await sut.execute({
+            query: { user_id: undefined },
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
     })
 })
