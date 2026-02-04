@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '../helpers'
 import { GetTransactionsByUserIdController } from './get-transactions-by-user-id'
 import { faker } from '@faker-js/faker'
 
@@ -25,7 +26,7 @@ describe('GetTransactionsByUserIdController', () => {
         return { sut, getTransactionsByUserIdUseCase }
     }
 
-    it('should return 200 when finding transactions by user_id sucssesfully', async () => {
+    it('should return 200 when finding transactions by userId sucssesfully', async () => {
         //arrange
         const { sut } = makeSut()
 
@@ -40,31 +41,51 @@ describe('GetTransactionsByUserIdController', () => {
         expect(response.statusCode).toBe(200)
     })
 
-    it('should return 400 when missing user_id', async () => {
+    it('should return 400 when missing userId', async () => {
         //arrange
         const { sut } = makeSut()
 
         //act
         const response = await sut.execute({
-            query: { user_id: undefined },
+            query: { userId: undefined },
         })
 
         //assert
         expect(response.statusCode).toBe(400)
     })
 
-    it('should return 400 when user_id is invalid', async () => {
+    it('should return 400 when useId is invalid', async () => {
         //arrange
         const { sut } = makeSut()
 
         //act
         const response = await sut.execute({
             query: {
-                user_id: 'invalid_id',
+                userId: 'invalid_id',
             },
         })
 
         //assert
         expect(response.statusCode).toBe(400)
+    })
+
+    it('should return 404 when user is not found', async () => {
+        //arrange
+        const { sut, getTransactionsByUserIdUseCase } = makeSut()
+
+        jest.spyOn(
+            getTransactionsByUserIdUseCase,
+            'execute',
+        ).mockRejectedValueOnce(new UserNotFoundError())
+
+        //act
+        const response = await sut.execute({
+            query: {
+                userId: faker.string.uuid(),
+            },
+        })
+
+        //assert
+        expect(response.statusCode).toBe(404)
     })
 })
