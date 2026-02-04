@@ -28,10 +28,6 @@ export class UpdateTransactionController {
                 return badRequest({ message: error.errors[0].message })
             }
 
-            if (error instanceof Error) {
-                return badRequest({ message: error.message })
-            }
-
             console.error(error)
             return serverError()
         }
