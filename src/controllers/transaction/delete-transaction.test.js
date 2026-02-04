@@ -70,7 +70,7 @@ describe('DeleteTransactionController', () => {
         expect(response.statusCode).toBe(404)
     })
 
-    it('should return 500 when use case throws error', async () => {
+    it('should return 500 when DeleteTransactionUseCase throws', async () => {
         //arrange
         const { sut, deleteTransactionUseCase } = makeSut()
 
