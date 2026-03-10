@@ -75,4 +75,86 @@ describe('UpdateTransactionController', () => {
             httpRequest.body,
         )
     })
+
+    it('should return 400 when unallowed field is provided', async () => {
+        //arrange
+        const { sut } = makeSut() 
+
+        //act
+        const response = await sut.execute({
+            ...httpRequest.body,
+            body:{
+                ...httpRequest.body,
+                unallowed_field: 'some_value',
+            },
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
+    })
+
+    it('should return 400 when type is invalid', async () => {
+        //arrange
+        const { sut } = makeSut()
+
+        //act
+        const response = await sut.execute({
+            ...httpRequest.body,
+            body: {
+                ...httpRequest.body,
+                type: 'invalid_type',
+            },
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
+    })
+
+    it('should return 400 when amount is missing', async () => {
+        //arrange
+        const { sut } = makeSut()
+
+        //act
+        const response = await sut.execute({
+            ...httpRequest.body,
+            amount: undefined,
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
+    })
+
+    it('should return 400 when amount is invalid', async () => {
+        //arrange
+        const { sut } = makeSut()
+
+        //act
+        const response = await sut.execute({
+            ...httpRequest.body,
+            body: {
+                ...httpRequest.body,
+                amount: 'invalid_amount',
+            },
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
+    })
+
+    it('should return 400 when amount is less than or equal to 0', async () => {
+        //arrange 
+        const { sut } = makeSut()
+
+        //act
+        const response = await sut.execute({
+            ...httpRequest.body,
+            body:{
+                ...httpRequest.body,
+                amount: 0,
+            }
+        })
+
+        //assert
+        expect(response.statusCode).toBe(400)
+    })
 })
