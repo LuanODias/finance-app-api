@@ -1,4 +1,4 @@
-import { badRequest, notFound, ok, serverError } from '../helpers/index.js'
+import { badRequest, ok, serverError, transactionNotFoundResponse } from '../helpers/index.js'
 import { updateTransactionSchema } from '../../schemas/index.js'
 import { ZodError } from 'zod'
 
@@ -19,7 +19,7 @@ export class UpdateTransactionController {
                 )
 
             if (!updatedTransaction) {
-                return notFound({ message: 'Transaction not found.' })
+                return transactionNotFoundResponse({ message: 'Transaction not found.' })
             }
 
             return ok(updatedTransaction)
