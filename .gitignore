@@ -12,3 +12,6 @@ node_modules
 postgres/
 docker-data/
 
+# test coverage
+coverage/
+

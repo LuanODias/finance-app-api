@@ -5,6 +5,7 @@
     "scripts": {
         "test": "jest --silent",
         "test:watch": "jest --watch --silent",
+        "test:coverage": "jest --passWithNoTests --coverage --silent",
         "postinstall": "npx husky install && npx prisma generate",
         "migrations": "node src/db/postgres/migrations/exec.js",
         "start:dev": "node --watch index.js"
