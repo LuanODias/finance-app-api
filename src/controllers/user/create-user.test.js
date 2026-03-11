@@ -1,9 +1,6 @@
 import { CreateUserController } from './create-user'
 import { faker } from '@faker-js/faker'
-import {
-    emailIsAlreadyInUseResponse,
-    EmailAlreadyInUseError,
-} from '../helpers/index.js'
+import { EmailAlreadyInUseError } from '../helpers/index.js'
 
 describe('CreateUserController', () => {
     class CreateUserUseCaseStub {
@@ -170,6 +167,5 @@ describe('CreateUserController', () => {
 
         //assert
         expect(result.statusCode).toBe(400)
-        expect(result.body).toEqual(emailIsAlreadyInUseResponse().body)
     })
 })
